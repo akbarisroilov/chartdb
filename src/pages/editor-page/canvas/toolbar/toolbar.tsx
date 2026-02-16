@@ -8,6 +8,7 @@ import {
     Undo,
     Scan,
     LayoutGrid,
+    Sparkles,
 } from 'lucide-react';
 import { Separator } from '@/components/separator/separator';
 import { ToolbarButton } from './toolbar-button';
@@ -26,6 +27,7 @@ import { useCanvas } from '@/hooks/use-canvas';
 import { cn } from '@/lib/utils';
 import { useDiagramFilter } from '@/context/diagram-filter-context/use-diagram-filter';
 import { useAlert } from '@/context/alert-context/alert-context';
+import { useAIAgent } from '@/context/ai-agent-context/use-ai-agent';
 
 const convertToPercentage = (value: number) => `${Math.round(value * 100)}%`;
 
@@ -41,6 +43,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({ readonly }) => {
     const { setShowFilter, reorderTables } = useCanvas();
     const { hasActiveFilter } = useDiagramFilter();
     const { showAlert } = useAlert();
+    const { toggleChat, isOpen: isAIAgentOpen } = useAIAgent();
 
     const toggleFilter = useCallback(() => {
         setShowFilter((prev) => !prev);
@@ -231,6 +234,32 @@ export const Toolbar: React.FC<ToolbarProps> = ({ readonly }) => {
                             </span>
                         </TooltipContent>
                     </Tooltip>
+                    {!readonly ? (
+                        <>
+                            <Separator orientation="vertical" />
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <span>
+                                        <ToolbarButton
+                                            onClick={toggleChat}
+                                            className={cn(
+                                                'transition-all duration-200',
+                                                {
+                                                    'bg-pink-500 text-white hover:bg-pink-600 hover:text-white':
+                                                        isAIAgentOpen,
+                                                }
+                                            )}
+                                        >
+                                            <Sparkles />
+                                        </ToolbarButton>
+                                    </span>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    {t('toolbar.ai_assistant')}
+                                </TooltipContent>
+                            </Tooltip>
+                        </>
+                    ) : null}
                 </CardContent>
             </Card>
         </div>

@@ -323,6 +323,18 @@ export const mr: LanguageTranslation = {
                 'Highlighting "{{typeName}}" - Click to clear',
             highlight_overlapping_tables: 'ओव्हरलॅपिंग टेबल्स हायलाइट करा',
             filter: 'टेबल्स फिल्टर करा',
+            ai_assistant: 'AI Assistant',
+        },
+
+        ai_agent: {
+            title: 'AI Assistant',
+            description: 'Create and modify tables using natural language',
+            empty_state: 'Ask me to create or modify your database schema',
+            empty_state_hint:
+                'Try: "Create a users table with id, email, and password fields"',
+            input_placeholder: 'Describe what you want to create or modify...',
+            clear_chat: 'Clear chat',
+            cancel: 'Cancel',
         },
 
         new_diagram_dialog: {

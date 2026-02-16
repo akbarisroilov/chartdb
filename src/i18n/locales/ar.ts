@@ -313,6 +313,18 @@ export const ar: LanguageTranslation = {
             clear_custom_type_highlight: 'Clear highlight for "{{typeName}}"',
             custom_type_highlight_tooltip:
                 'Highlighting "{{typeName}}" - Click to clear',
+            ai_assistant: 'AI Assistant',
+        },
+
+        ai_agent: {
+            title: 'AI Assistant',
+            description: 'Create and modify tables using natural language',
+            empty_state: 'Ask me to create or modify your database schema',
+            empty_state_hint:
+                'Try: "Create a users table with id, email, and password fields"',
+            input_placeholder: 'Describe what you want to create or modify...',
+            clear_chat: 'Clear chat',
+            cancel: 'Cancel',
         },
 
         new_diagram_dialog: {
