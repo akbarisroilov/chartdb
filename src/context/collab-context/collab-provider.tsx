@@ -55,7 +55,9 @@ export const CollabProvider: React.FC<React.PropsWithChildren> = ({
     const [collaborators, setCollaborators] = useState<
         Map<string, Collaborator>
     >(new Map());
-    const [username, setUsernameState] = useState('Anonymous');
+    const [username, setUsernameState] = useState(
+        () => localStorage.getItem('chartdb-collab-username') || 'Anonymous'
+    );
 
     const tablesRef = useRef(tables);
     const relationshipsRef = useRef(relationships);
@@ -351,6 +353,10 @@ export const CollabProvider: React.FC<React.PropsWithChildren> = ({
             const collab = getCollab();
             setIsCollaborating(true);
             const link = await collab.startCollaboration(roomLinkData);
+            // Send persisted username to server
+            const savedName =
+                localStorage.getItem('chartdb-collab-username') || 'Anonymous';
+            collab.setUsername(savedName);
             return link;
         },
         [getCollab]
@@ -383,6 +389,7 @@ export const CollabProvider: React.FC<React.PropsWithChildren> = ({
     const setUsername = useCallback(
         (name: string) => {
             setUsernameState(name);
+            localStorage.setItem('chartdb-collab-username', name);
             const collab = getCollab();
             collab.setUsername(name);
         },
